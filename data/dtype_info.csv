@@ -1,0 +1,1 @@
+[('city', '|S3'), ('year', 'int'), ('weekofyear', 'int'), ('week_start_date', '|S10')]
