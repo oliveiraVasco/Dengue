@@ -9,6 +9,7 @@ class DataManagement:
 
     # First index of the second city on test data
     TEST_CITY_INDEX = 260
+
     def __init__(self):
         '''
         Constructor reads data from files
@@ -21,9 +22,9 @@ class DataManagement:
         '''
         # Loading features
         self.train_data = np.genfromtxt(open("data/dengue_features_train.csv"),
-                                  delimiter=',',
-                                  dtype='float',
-                                  skip_header=1)
+                                        delimiter=',',
+                                        dtype='float',
+                                        skip_header=1)
 
         self.test_data = np.genfromtxt(open("data/dengue_features_test.csv"),
                                  delimiter=',',
@@ -55,5 +56,25 @@ class DataManagement:
         str_names = str_names.rstrip('\n')
 
         self.features_names = str_names.split(',')
+
+    def get_city(self, city, train):
+        '''
+        Get train/test data by city
+
+        :param city: sj (san juan) or iq (iquitos)
+        :param train: True to return train_data, False to return test data
+        :return: segmented ndarray
+        '''
+        if train == True:
+            if city == 'sj':
+                return self.train_data[0:self.TRAIN_CITY_INDEX, :]
+            elif city == 'iq':
+                return self.train_data[self.TRAIN_CITY_INDEX:, :]
+        else:
+            if city == 'sj':
+                return self.test_data[0:self.TEST_CITY_INDEX, :]
+            elif city == 'iq':
+                return self.test_data[self.TEST_CITY_INDEX:, :]
+
 
 
