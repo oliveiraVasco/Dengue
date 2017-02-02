@@ -1,15 +1,16 @@
 import preAnalysis as pa
-from dataManagement import DataManagement
+from dataManagement import DataObject
 
 
 def main():
     # Data collection
-    data_object = DataManagement()
+    train_object = DataObject(True)
+    test_object = DataObject(False)
 
     # Plot object definition
-    plot_object = pa.Plotting(data_object.label_data,
-                          data_object.train_data,
-                          data_object.features_names)
+    plot_object = pa.Plotting(train_object.labels,
+                              train_object.data,
+                              train_object.features_names)
 
     # Multiple plot draw
     plot_object.multiple_plot(False)
