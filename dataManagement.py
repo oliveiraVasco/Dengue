@@ -55,21 +55,17 @@ class DataObject:
                 self.city_index = i
                 break
 
-    def get_city(self, city, train):
+    def get_city(self, city):
         '''
         Get train/test data by city
 
         :param city: sj (san juan) or iq (iquitos)
-        :param train: True to return train_data, False to return test data
         :return: segmented ndarray
         '''
-        if train == True:
-            if city == 'sj':
-                return self.data[0:self.city_index, :]
-            elif city == 'iq':
-                return self.data[self.city_index:, :]
+        if city == 'sj':
+            return self.data[0:self.city_index, :]
+        elif city == 'iq':
+            return self.data[self.city_index:, :]
         else:
-            if city == 'sj':
-                return self.data[0:self.city_index, :]
-            elif city == 'iq':
-                return self.data[self.city_index:, :]
+            print "City not available."
+            return None
