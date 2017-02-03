@@ -57,7 +57,7 @@ class DataObject:
 
     def get_city(self, city):
         '''
-        Get train/test data by city
+        Get data by city
 
         :param city: sj (san juan) or iq (iquitos)
         :return: segmented ndarray

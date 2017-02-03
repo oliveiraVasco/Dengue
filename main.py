@@ -13,7 +13,7 @@ def main():
                               train_object.features_names)
 
     # Multiple plot draw
-    plot_object.multiple_plot(False)
+    plot_object.multiple_plot(True)
 
 
 if __name__=="__main__":

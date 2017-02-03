@@ -17,24 +17,41 @@ class Plotting:
         self.features = features
         self.features_names = features_names
 
-    def simple_plot(self, index, name, display):
+    def simple_plot(self, index_y, index_x, name_y, name_x, display, lag):
         '''
-        Plots a single feature (x axis)
-        Labels on y axis
+        Plots two series with index on input
 
-        :param index: integer, index of the feature
-        :param name: name to be written on xlabel
+        :param index_y: -1 for self.label, other for the respetive index
+        :param index_x: index of x axis series
+        :param name_x: name to show on x label
+        :param name_y: name to show on y label
         :param display: if true shows the plot, if false saves the image
+        :param lag: lags from x to y
         :return:
         '''
-        plot_feature = self.features[:, index]
-        plt.xlabel(name)
-        plt.ylabel("Dengue cases")
-        plt.plot(plot_feature, self.label, 'ro')
+
+        if index_y == -1:
+            plot_y = self.label
+        elif index_y in range(self.features.shape[1]):
+            plot_y = self.features[:, index_y]
+        else:
+            print "Index y out of range."
+            return
+
+        plot_x = self.features[:, index_x]
+
+        if lag > 0:
+            plot_y = plot_y[lag:, :]
+            plot_x = plot_x[:lag, :]
+
+
+        plt.xlabel(name_x)
+        plt.ylabel(name_y)
+        plt.plot(plot_x, plot_y, 'ro')
         if display == True:
             plt.show()
         else:
-            plt.savefig('images/cases_'+name+'.png')
+            plt.savefig('images/' + name_y + '_' + name_x + '.png')
             plt.close()
 
     def multiple_plot(self, display):
@@ -45,5 +62,5 @@ class Plotting:
         :return:
         '''
         for i in range(self.features.shape[1]):
-            self.simple_plot(i, self.features_names[i], display)
+            self.simple_plot(-1, i, 'Dengue_cases', self.features_names[i], display, 0)
 
