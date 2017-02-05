@@ -17,7 +17,7 @@ class Plotting:
         self.features = features
         self.features_names = features_names
 
-    def simple_plot(self, index_y, index_x, name_y, name_x, display, lag):
+    def simple_plot(self, index_y, index_x, display, lag):
         '''
         Plots two series with index on input
 
@@ -32,13 +32,16 @@ class Plotting:
 
         if index_y == -1:
             plot_y = self.label
+            name_y = "Dengue_Cases"
         elif index_y in range(self.features.shape[1]):
             plot_y = self.features[:, index_y]
+            name_y = self.features_names[index_y]
         else:
             print "Index y out of range."
             return
 
         plot_x = self.features[:, index_x]
+        name_x = self.features_names[index_x]
 
         if lag > 0:
             plot_y = plot_y[lag:, :]
@@ -62,5 +65,5 @@ class Plotting:
         :return:
         '''
         for i in range(self.features.shape[1]):
-            self.simple_plot(-1, i, 'Dengue_cases', self.features_names[i], display, 0)
+            self.simple_plot(-1, i, display, 0)
 
