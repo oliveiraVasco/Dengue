@@ -44,8 +44,8 @@ class Plotting:
         name_x = self.features_names[index_x]
 
         if lag > 0:
-            plot_y = plot_y[lag:, :]
-            plot_x = plot_x[:lag, :]
+            plot_y = plot_y[lag:]
+            plot_x = plot_x[:-lag]
 
 
         plt.xlabel(name_x)
